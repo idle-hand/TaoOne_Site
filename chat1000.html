@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Number Game</title>
+</head>
+<body>
+
+  <h1>Guess the Number Game</h1>
+
+  <p>Guess a number between 1 and 100:</p>
+  <input type="text" id="guessInput">
+  <button onclick="guessNumber()">Guess</button>
+
+  <p id="message"></p>
+
+  <script>
+    // generate a random number between 1 and 100
+    var randomNumber = Math.floor(Math.random() * 100) + 1;
+
+    // keep track of the number of guesses
+    var numberOfGuesses = 0;
+
+    function guessNumber() {
+      var guessInput = document.getElementById("guessInput");
+      var guess = parseInt(guessInput.value);
+
+      // check if the guess is valid
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        document.getElementById("message").innerHTML = "Please enter a valid number between 1 and 100.";
+        guessInput.value = "";
+        return;
+      }
+
+      // increase the number of guesses
+      numberOfGuesses++;
+
+      // check if the guess is too low, too high, or correct
+      if (guess < randomNumber) {
+        document.getElementById("message").innerHTML = "Too low. Guess higher.";
+        guessInput.value = "";
+      } else if (guess > randomNumber) {
+        document.getElementById("message").innerHTML = "Too high. Guess lower.";
+        guessInput.value = "";
+      } else {
+        document.getElementById("message").innerHTML = "Congratulations! You guessed the number in " + numberOfGuesses + " guesses.";
+        guessInput.disabled = true;
+      }
+    }
+  </script>
+  
+<!-- In this HTML file, we've added an input field and a button for the user to enter their guess. We've also added a message element to display messages to the user, such as whether their guess is too low or too high.
+
+When the user clicks the "Guess" button, the guessNumber() function is called. This function checks if the user's guess is valid (i.e., a number between 1 and 100) and then checks if the guess is too low, too high, or correct. If the guess is correct, the function displays a message with the number of guesses it took and disables the guess input field so the user can't keep guessing.-->
+</body>
+</html>
